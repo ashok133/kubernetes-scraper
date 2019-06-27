@@ -1,0 +1,29 @@
+sudo pip3 install google-cloud-pubsub
+
+sudo pip3 install google-cloud-monitoring
+
+sudo pip3 install -U googleapis-common-protos==1.5.10
+
+gcloud auth login and set project id
+
+enable pub/sub and kubernetes on gcloud for the project
+
+create topic and subscriptions
+
+create kubernetes cluster
+
+create storage bucket
+
+activate service account and download the key json
+
+write Dockerfile
+
+docker build
+
+docker run
+
+TODO:
+fix csv corpus save
+set up kubectl
+create kubectl job
+watch the workers rave through all the links
