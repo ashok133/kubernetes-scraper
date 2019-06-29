@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 # from interruptingcow import timeout
 from google.cloud import pubsub
 # from google.cloud import monitoring
+from sheets_util import *
 
+# https://www.howtoforge.com/tutorial/how-to-create-docker-images-with-dockerfile/
 
 PROJECT = 'metrix-news'
 TOPIC = 'scrape-queue-urls'
@@ -53,12 +55,15 @@ def fetch_article_text(media_id, url):
         article_text = soup.find_all('p')
         corpus = ''
         for element in article_text:
-            corpus += "\n" + ''.join(element.findAll(text = True))
+            corpus += '\n' + ''.join(element.findAll(text = True))
+            # p.agent_info = u' '.join((agent_contact, agent_telno)).encode('utf-8').strip()
+            # corpus.encode()
         news_corpus_list.append(media_id)
         news_corpus_list.append(url)
         news_corpus_list.append(corpus)
-        print(corpus)
-        writer.writerow(news_corpus_list)
+        # print(corpus)
+        # writer.writerow(news_corpus_list)
+        append_row(news_corpus_list)
     # copy_to_gcs('article_corpus.csv')
 
 def copy_to_gcs(csv_file):
@@ -75,7 +80,7 @@ def handle_url(id_url):
 
 def main():
     # client = monitoring.Client(project=PROJECT)
-
+    print("okay im here")
     subscriber = pubsub.SubscriberClient()
     sub_path = 'projects/{}/subscriptions/{}'.format(PROJECT, SUBSCRIPTION)
     subscription = subscriber.subscribe(sub_path, callback = handle_url)

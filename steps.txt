@@ -27,3 +27,7 @@ fix csv corpus save
 set up kubectl
 create kubectl job
 watch the workers rave through all the links
+
+---------
+
+pip3 install gspread, PyOpenSSL, oauthclient
